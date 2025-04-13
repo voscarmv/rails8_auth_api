@@ -15,6 +15,7 @@
 $ rails new my_api_app --api
 $ cd my_api_app
 $ rails g authentication
+$ rails g scaffold project title:string description:text user:references
 ```
 
 ## Run with

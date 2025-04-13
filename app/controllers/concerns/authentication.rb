@@ -21,12 +21,20 @@ module Authentication
       resume_session || request_authentication
     end
 
-    def resume_session
-      Current.session ||= find_session_by_cookie
-    end
+    # def resume_session
+    #   Current.session ||= find_session_by_cookie
+    # end
 
-    def find_session_by_cookie
-      Session.find_by(id: cookies.signed[:session_id]) if cookies.signed[:session_id]
+    # def find_session_by_cookie
+    #   Session.find_by(id: cookies.signed[:session_id]) if cookies.signed[:session_id]
+    # end
+
+    def resume_session
+      Current.session = find_session_by_token
+    end
+  
+    def find_session_by_token
+      Session.find_by(token: request.headers[:authorization]&.split(" ")[-1])
     end
 
     def request_authentication
