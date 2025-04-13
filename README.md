@@ -11,11 +11,11 @@
 
 ## Created with
 
-`
+```
 $ rails new my_api_app --api
 $ cd my_api_app
 $ rails g authentication
-`
+```
 
 ## Run with
 
