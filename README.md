@@ -7,7 +7,7 @@
 
 ## Postman requests
 
-- https://.postman.co/workspace/My-Workspace~722dec53-df85-40a5-8244-4a7f428b1a8c/request/17376401-d068842a-992c-4626-9515-6a3ba888950a?action=share&creator=17376401&ctx=documentation
+- https://team55-6229.postman.co/workspace/722dec53-df85-40a5-8244-4a7f428b1a8c/request/17376401-d068842a-992c-4626-9515-6a3ba888950a?action=share&source=copy-link&creator=17376401&ctx=documentation
 
 ## Created with
 
