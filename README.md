@@ -22,3 +22,5 @@ $ rails g authentication
 `$ rails s`
 
 And test with postman
+
+Remember to `rails db:rollback` if `rails db:migrate` don't work
