@@ -1,24 +1,18 @@
-# README
+# Rails 8 Auth API example
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Guides used
 
-Things you may want to cover:
+- https://a-chacon.com/en/on%20rails/2024/10/16/poc-using-rails-8-auth-system-in-api-only.html
+- https://medium.com/craft-academy/authentication-in-rails-8-api-only-application-ac33234b74de
 
-* Ruby version
+## Postman requests
 
-* System dependencies
+- https://.postman.co/workspace/My-Workspace~722dec53-df85-40a5-8244-4a7f428b1a8c/request/17376401-d068842a-992c-4626-9515-6a3ba888950a?action=share&creator=17376401&ctx=documentation
 
-* Configuration
+## Created with
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+``
+rails new my_api_app --api
+cd my_api_app
+rails g authentication
+``
