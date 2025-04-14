@@ -48,11 +48,9 @@ module Authentication
       render json: { error: 'Unauthorized' }, status: :unauthorized
     end
 
-
-
-    def after_authentication_url
-      session.delete(:return_to_after_authenticating) || root_url
-    end
+    # def after_authentication_url
+    #   session.delete(:return_to_after_authenticating) || root_url
+    # end
 
     def start_new_session_for(user)
       user.sessions.create!(user_agent: request.user_agent, ip_address: request.remote_ip).tap do |session|
@@ -62,6 +60,6 @@ module Authentication
 
     def terminate_session
       Current.session.destroy
-      cookies.delete(:session_id)
+      # cookies.delete(:session_id)
     end
 end
