@@ -40,7 +40,7 @@ class ProjectsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
-      @project = Current.user.project.find(params.expect[:id])
+      @project = Current.user.projects.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
