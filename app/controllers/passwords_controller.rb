@@ -1,5 +1,6 @@
 class PasswordsController < ApplicationController
   allow_unauthenticated_access
+  skip_after_action
   before_action :set_user_by_token, only: %i[ edit update ]
 
   def new
@@ -7,10 +8,10 @@ class PasswordsController < ApplicationController
 
   def create
     if user = User.find_by(email_address: params[:email_address])
-      PasswordsMailer.reset(user).deliver_later
+      PasswordsMailer.reset(user).deliver_now
     end
 
-    redirect_to new_session_path, notice: "Password reset instructions sent (if user with that email address exists)."
+    render json: { data: "Password reset instructions sent (if user with that email address exists)." }
   end
 
   def edit
@@ -18,9 +19,9 @@ class PasswordsController < ApplicationController
 
   def update
     if @user.update(params.permit(:password, :password_confirmation))
-      redirect_to new_session_path, notice: "Password has been reset."
+      render json: { data: "Password has been reset." } 
     else
-      redirect_to edit_password_path(params[:token]), alert: "Passwords did not match."
+      render json: { data: "Passwords did not match." }, status: :unprocessable_entity
     end
   end
 
@@ -28,6 +29,6 @@ class PasswordsController < ApplicationController
     def set_user_by_token
       @user = User.find_by_password_reset_token!(params[:token])
     rescue ActiveSupport::MessageVerifier::InvalidSignature
-      redirect_to new_password_path, alert: "Password reset link is invalid or has expired."
+      render json: { data: "Password reset link is invalid or has expired." }, status: :unprocessable_entity
     end
 end
