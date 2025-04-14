@@ -3,6 +3,7 @@ module Authentication
 
   included do
     before_action :require_authentication
+    after_action :refresh_session
     # helper_method :authenticated?
   end
 
@@ -18,7 +19,7 @@ module Authentication
     end
 
     def require_authentication
-      resume_session || request_authentication
+      resume_session || render_unauthorized
     end
 
     # def resume_session
@@ -37,10 +38,17 @@ module Authentication
       Session.find_by(token: request.headers[:authorization]&.split(" ")[-1])
     end
 
-    def request_authentication
-      session[:return_to_after_authenticating] = request.url
-      redirect_to new_session_path
+    def refresh_session
+      if Current.session
+        Current.session.regenerate_token!
+        response.set_header('Authorization', "Bearer #{Current.session.token}")
+      end
     end
+    def render_unauthorized
+      render json: { error: 'Unauthorized' }, status: :unauthorized
+    end
+
+
 
     def after_authentication_url
       session.delete(:return_to_after_authenticating) || root_url
