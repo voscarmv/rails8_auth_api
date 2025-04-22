@@ -18,10 +18,32 @@ $ rails g authentication
 $ rails g scaffold project title:string description:text user:references
 ```
 
-## Run with
+## Installation and testing
 
-`$ rails s`
+Clone, `cd` into the dir and run
 
-And test with postman
+```
+$ bundle install
+$ rails db:migrate
+$ rails db:seed
+$ rails s
+```
+
+And test with the API calls from [Rails 8 Auth Tester](https://github.com/voscarmv/rails8_auth_tester).
+
+In the tester, run
+
+```
+$ npm install
+$ node changepass.js
+```
+
+To change your admin password. The default username: `admin@example.com` and password: `admin`.
+
+Use `node adminsignup.js` to create a new user account.
+
+The only difference between admin role and user role currently is that admin can create, delete and update users and other admins, but user can not. You may add as many roles and permissions as you need.
+
+To change your password you will need to provide your actual email, as the API will mail you a reset token. Also, for that to work you'll have to set up your own SMTP credentials directly in `config/environments/development.rb` or using the encrypted environment with something like `EDITOR=nano rails credentials:edit --environment=development`
 
 Remember to `rails db:rollback` if `rails db:migrate` don't work
