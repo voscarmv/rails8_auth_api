@@ -45,7 +45,10 @@ module Authentication
       end
     end
     def render_unauthorized
-      render json: { error: 'Unauthorized' }, status: :unauthorized
+        render_error(
+          message: "Unauthorized",
+          status: :unauthorized
+        )
     end
 
     # def after_authentication_url
