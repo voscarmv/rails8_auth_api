@@ -69,6 +69,6 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.expect(:project).permit(:title, :description, :user_id)
+    params.expect(project: [ :title, :description, :user_id ])
   end
 end
