@@ -33,7 +33,7 @@ module Authentication
     def resume_session
       Current.session = find_session_by_token
     end
-  
+
     def find_session_by_token
       Session.find_by(token: request.headers[:authorization]&.split(" ")[-1])
     end
@@ -41,7 +41,7 @@ module Authentication
     def refresh_session
       if Current.session
         Current.session.regenerate_token!
-        response.set_header('Authorization', "Bearer #{Current.session.token}")
+        response.set_header("Authorization", "Bearer #{Current.session.token}")
       end
     end
     def render_unauthorized
@@ -67,7 +67,7 @@ module Authentication
     end
 
     def require_admin
-      unless Current.user&.role == 'admin'
+      unless Current.user&.role == "admin"
         render_error(
           message: "You do not have permission to perform this action.",
           status: :forbidden

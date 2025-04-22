@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :require_authentication
-  before_action :set_user, only: [:show, :update, :destroy]
-  before_action :require_admin, only: [:index, :update, :create, :destroy]
+  before_action :set_user, only: [ :show, :update, :destroy ]
+  before_action :require_admin, only: [ :index, :update, :create, :destroy ]
 
   def index
     users = User.all
@@ -71,7 +71,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.expect(user: [:email_address, :password, :role])
+    params.expect(user: [ :email_address, :password, :role ])
   end
 
   # def require_admin
