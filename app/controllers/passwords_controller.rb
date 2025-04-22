@@ -2,6 +2,7 @@ class PasswordsController < ApplicationController
   allow_unauthenticated_access
   skip_after_action
   before_action :set_user_by_token, only: %i[ edit update ]
+  before_action :require_admin, only: [:update]
 
   def new
   end
