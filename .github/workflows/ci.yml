@@ -20,8 +20,10 @@ jobs:
           bundler-cache: true
 
       - name: Install or update Brakeman
-        run: gem uninstall brakeman
-        run: gem install brakeman -v 7.0.2
+        run: gem install brakeman -v 7.0.2 --force
+
+      - name: Verify Brakeman version
+        run: brakeman --version
 
       - name: Scan for common Rails security vulnerabilities using static analysis
         run: bin/brakeman --no-pager
