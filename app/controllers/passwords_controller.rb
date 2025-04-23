@@ -21,7 +21,7 @@ class PasswordsController < ApplicationController
   end
 
   def update
-    if @user.update(params.permit(:password, :password_confirmation))
+    if @user.update(params.require(:user).permit(:password, :password_confirmation))
       render_success(
         message: "Password has been reset.",
         data: {}
