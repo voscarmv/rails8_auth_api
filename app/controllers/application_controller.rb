@@ -27,7 +27,7 @@ class ApplicationController < ActionController::API
   def handle_record_not_found()
     render_error(
       message: "Record not found",
-      errors: { detail: "exception.inspect" },
+      errors: { detail: exception.message },
       status: :not_found
     )
   end
@@ -35,7 +35,7 @@ class ApplicationController < ActionController::API
   def handle_parameter_missing()
     render_error(
       message: "Missing parameter",
-      errors: { detail: "exception" },
+      errors: { detail: exception.message },
       status: :bad_request
     )
   end
