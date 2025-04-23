@@ -73,13 +73,4 @@ class UsersController < ApplicationController
   def user_params
     params.expect(user: [ :email_address, :password, :role ])
   end
-
-  # def require_admin
-  #   unless Current.user&.role == 'admin'
-  #     render_error(
-  #       message: "You do not have permission to perform this action.",
-  #       status: :forbidden
-  #     )
-  #   end
-  # end
 end
