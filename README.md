@@ -29,7 +29,7 @@ $ rails db:seed
 $ rails s
 ```
 
-And test with the API calls from [Rails 8 Auth Tester](https://github.com/voscarmv/rails8_auth_tester).
+And test with the API calls from [Rails 8 Auth Tester](https://github.com/voscarmv/rails8_auth_tester2).
 
 In the tester, run
 
