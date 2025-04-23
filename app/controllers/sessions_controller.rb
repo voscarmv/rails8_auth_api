@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
   }
 
   def create
-    if user = User.authenticate_by(params.permit(:email_address, :password))
+    if user = User.authenticate_by(session_params)
       start_new_session_for user
       render_success(
         message: "Login successful.",
@@ -32,5 +32,11 @@ class SessionsController < ApplicationController
       data: {},
       status: :ok
     )
+  end
+
+  private
+
+  def session_params
+    params.expect(user: [:email_address, :password])
   end
 end
