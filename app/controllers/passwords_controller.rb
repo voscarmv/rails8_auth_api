@@ -1,10 +1,7 @@
 class PasswordsController < ApplicationController
   allow_unauthenticated_access
   skip_after_action
-  before_action :set_user_by_token, only: %i[edit update]
-
-  def new
-  end
+  before_action :set_user_by_token, only: %i[update]
 
   def create
     if user = User.find_by(email_address: params[:email_address])
@@ -17,15 +14,8 @@ class PasswordsController < ApplicationController
     )
   end
 
-  def edit
-  end
-
   def update
-    puts 'I am here check this outtt!@!!!!!!!!!!!!!!!!!'
-    params.require(:token, :password, :password_confirmation)
-    puts params.inspect
-    puts @user.inspect
-    if @user.update(password: '123', password_confirmation: '123')
+    if @user.update(params.require(:password).permit(:password, :password_confirmation))
       render_success(
         message: "Password has been reset.",
         data: {}
