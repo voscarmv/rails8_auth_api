@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :passwords, param: :token
   resources :users, only: [ :index, :show, :create, :update, :destroy ]
 
-  get '/standard_error', to: 'test_exceptions#standard_error'
+  get "/standard_error" => "test_exceptions#standard_error", as: :standard_error
   get "/record_not_found" => "test_exceptions#record_not_found", as: :record_not_found
   get "/parameter_missing" => "test_exceptions#parameter_missing", as: :parameter_missing
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
