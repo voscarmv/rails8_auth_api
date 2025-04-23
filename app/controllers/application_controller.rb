@@ -24,7 +24,7 @@ class ApplicationController < ActionController::API
 
   private
 
-  def handle_record_not_found()
+  def handle_record_not_found(exception)
     render_error(
       message: "Record not found",
       errors: { detail: exception.message },
@@ -32,7 +32,7 @@ class ApplicationController < ActionController::API
     )
   end
 
-  def handle_parameter_missing()
+  def handle_parameter_missing(exception)
     render_error(
       message: "Missing parameter",
       errors: { detail: exception.message },
