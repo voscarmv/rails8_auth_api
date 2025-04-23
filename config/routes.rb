@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :projects
   resource :session
-  
+
   resources :passwords, param: :token
   resources :users, only: [ :index, :show, :create, :update, :destroy ]
 

@@ -15,7 +15,7 @@ class PasswordsController < ApplicationController
   end
 
   def update
-    if @user.update(params.expect(password: [:password, :password_confirmation]))
+    if @user.update(password_params)
       render_success(
         message: "Password has been reset.",
         data: {}
@@ -38,5 +38,9 @@ class PasswordsController < ApplicationController
       message: "Password reset token is invalid or has expired.",
       status: :unprocessable_entity
     )
+  end
+
+  def password_params
+    params.expect(password: [ :password, :password_confirmation ])
   end
 end
