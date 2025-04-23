@@ -1,8 +1,9 @@
 class ApplicationController < ActionController::API
   include Authentication
+  # Order is important here https://stackoverflow.com/questions/9119066/how-do-i-determine-which-exception-handler-rescue-from-will-choose-in-rails
+  rescue_from StandardError, with: :handle_internal_server_error
   rescue_from ActiveRecord::RecordNotFound, with: :handle_record_not_found
   rescue_from ActionController::ParameterMissing, with: :handle_parameter_missing
-  rescue_from StandardError, with: :handle_internal_server_error
 
   # Used for JSON API response formatting
   def render_success(message:, data: {}, status: :ok)
@@ -23,18 +24,18 @@ class ApplicationController < ActionController::API
 
   private
 
-  def handle_record_not_found(exception)
+  def handle_record_not_found()
     render_error(
       message: "Record not found",
-      errors: { detail: exception.message },
+      errors: { detail: "exception.inspect" },
       status: :not_found
     )
   end
 
-  def handle_parameter_missing(exception)
+  def handle_parameter_missing()
     render_error(
       message: "Missing parameter",
-      errors: { detail: exception.message },
+      errors: { detail: "exception" },
       status: :bad_request
     )
   end
