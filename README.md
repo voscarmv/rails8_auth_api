@@ -47,3 +47,19 @@ The only difference between admin role and user role currently is that admin can
 To change your password you will need to provide your actual email, as the API will mail you a reset token. Also, for that to work you'll have to set up your own SMTP credentials directly in `config/environments/development.rb` or using the encrypted environment with something like `EDITOR=nano rails credentials:edit --environment=development`
 
 Remember to `rails db:rollback` if `rails db:migrate` don't work
+
+## Deployment on render.com
+
+Remember to use the following settings:
+
+### Build command
+
+`$ bundle install;`
+
+### Start command
+
+`$ rails db:setup && bundle exec rails server -b 0.0.0.0 -e production`
+
+### Environment Variables
+
+Set `RAILS_MASTER_KEY` to whatever is in `config/credentials/production.key`
